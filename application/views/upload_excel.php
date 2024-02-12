@@ -3,10 +3,28 @@
 <head>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<style>
+		.bg-blue-900,.bg-blue-700,.text-blue-900{
+			background-color: #7FB0C5 !important;
+		}
+		.bg-gray-100{
+			background-color: rgba(127, 176, 197, 0.4) !important;
+		}
+		.bg-card{
+			background-color: rgba(168, 212, 215, 0.7) !important;
+;
+		}
+		.bg-gray-200{
+			background-color: rgba(168, 212, 215, 1);
+		}
+		.bg-gray-300{
+			background-color: rgba(127, 176, 197, 0.4);
+		}
+	</style>
 </head>
 <body>	
 <body class="bg-gray-100">
-	<nav class="bg-white border-gray-200 dark:bg-gray-900">
+	<nav class="bg-blue-900 border-gray-200 dark:bg-gray-900">
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 			<a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
 				<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
@@ -19,15 +37,15 @@
 			</svg>
 			</button>
 			<div class="hidden w-full md:block md:w-auto" id="navbar-default">
-				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-blue-900 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 					<li>
-						<a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Dashboard</a>
+						<a href="#" class="block py-2 px-3 text-black underline bg-blue-900 rounded md:bg-transparent md:bg-black md:p-0" aria-current="page">Administrasi</a>
 					</li>
 					<li>
 						<a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Koding</a>
 					</li>
 					<li>
-						<a href="<?=base_url('admin/dashboard')?>" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kembali</a>
+						<a href="<?=base_url('admin/dashboard')?>" class="block py-2 px-3 text-gray-900 rounded hover:bg-black hover:underline md:hover:bg-transparent md:border-0 md:hover:text-black md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kembali</a>
 					</li>
 				</ul>
 			</div>
@@ -37,9 +55,9 @@
 		<div class="mb-5 pt-18 text-center">
 			<h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Deteksi Double Claim</h1>
 		</div>
-		<div class="bg-white w-1/2 mx-auto">
+		<div class="bg-gray-300 w-1/2 mx-auto">
 			<div class="p-10">
-				<div class="border p-10 flex flex-col items-center">
+				<div class="border border-dashed border-black p-10 flex flex-col items-center bg-gray-200">
 					<h4 class="text-center font-bold mb-5">Masukkan data yang telah di download dari halaman INA-CBG’s</h4>
 					<div class="w-full">
 						<form method="post" class="flex gap-3" action="<?php echo base_url('excel/upload')?>" enctype="multipart/form-data">

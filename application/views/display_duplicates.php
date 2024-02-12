@@ -4,9 +4,27 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Duplicate Records</title>
+	<style>
+		.bg-blue-900,.bg-blue-700,.text-blue-900{
+			background-color: #7FB0C5 !important;
+		}
+		.bg-gray-100{
+			background-color: rgba(127, 176, 197, 0.4) !important;
+		}
+		.bg-card{
+			background-color: rgba(168, 212, 215, 0.7) !important;
+;
+		}
+		.bg-gray-200{
+			background-color: rgba(168, 212, 215, 1);
+		}
+		.bg-gray-300{
+			background-color: rgba(127, 176, 197, 0.4);
+		}
+	</style>
 </head>
 <body class="bg-gray-100">
-	<nav class="bg-white border-gray-200 dark:bg-gray-900">
+	<nav class="bg-blue-900 border-gray-200 dark:bg-gray-900">
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 			<a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
 				<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
@@ -19,15 +37,15 @@
 			</svg>
 			</button>
 			<div class="hidden w-full md:block md:w-auto" id="navbar-default">
-				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-blue-900 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 					<li>
-						<a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Dashboard</a>
+						<a href="#" class="block py-2 px-3 text-black underline bg-blue-900 rounded md:bg-transparent md:bg-black md:p-0" aria-current="page">Administrasi</a>
 					</li>
 					<li>
 						<a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Koding</a>
 					</li>
 					<li>
-						<a href="<?=base_url('admin/dashboard')?>" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kembali</a>
+						<a href="<?=base_url('admin/dashboard')?>" class="block py-2 px-3 text-gray-900 rounded hover:bg-black hover:underline md:hover:bg-transparent md:border-0 md:hover:text-black md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kembali</a>
 					</li>
 				</ul>
 			</div>
@@ -39,38 +57,52 @@
 		<div class="relative overflow-x-auto">
 			<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-					<tr>
+					<tr class="">
 						<th class="px-6 py-3">NO</th>
-						<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">NOSEP</th>
+						<th class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">NOSEP</th>
 						<th class="px-6 py-3">JENPEL</th>
-						<th class="px-6 py-3">TGLSEP</th>
-						<th class="px-6 py-3">TGLPULANG</th>
+						<th colspan="2" class="px-6 py-3 text-center border-b">Tanggal Kunjungan</th>
 						<th class="px-6 py-3">NOKARTU</th>
 						<th class="px-6 py-3">NMPESERTA</th>
 						<th class="px-6 py-3">KETERANGAN</th>
+					</tr>
+					<tr >
+						<th class="px-6 py-3"></th>
+						<th class="px-6 py-3"></th>
+						<th class="px-6 py-3"></th>
+						<th class="px-6 py-3">TGLSEP</th>
+						<th class="px-6 py-3">TGLPULANG</th>
+						<th class="px-6 py-3"></th>
+						<th class="px-6 py-3"></th>
+						<th class="px-6 py-3"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php $i = 1?>
 					<?php foreach ($duplicates as $group): ?>
 						<?php foreach ($group as $key => $row): ?>
-							<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-								<td class="px-6 py-4"><?php echo $i++; ?></td>
-								<td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $row['A']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['B']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['C']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['D']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['E']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['F']; ?></td>
-								<td class="px-6 py-4"><?php echo $row['G']; ?></td>
-							</tr>
+							<?php if (is_array($row)): ?>
+								<?php 
+									$backgroundColor = isset($group['color']) ? $group['color'] : '#FFFFFF'; // Default color if 'color' key is not set
+								?>
+								<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-gray-900" style="background-color: <?php echo $backgroundColor; ?>">
+									<td class="px-6 py-4"><?php echo $i++; ?></td>
+									<td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $row['A']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['B']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['C']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['D']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['E']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['F']; ?></td>
+									<td class="px-6 py-4"><?php echo $row['G']; ?></td>
+								</tr>
+							<?php endif; ?>
 						<?php endforeach; ?>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
 		<?php else: ?>
-			<p>No duplicate records found.</p>
+			<p class="text-red-500">No duplicate records found.</p>
 		<?php endif; ?>
 	</div>
 </body>
