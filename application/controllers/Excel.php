@@ -61,18 +61,20 @@ class Excel extends CI_Controller {
 	private function groupDuplicates($sheetData) {
 		$duplicates = $this->findDuplicates($sheetData);
 		$groupedData = array();
-	
+
+		$colors = array('#90e0ef', '#FFFFFF'); // Putih dan Biru
+
+		$colorIndex = 0;
 		foreach ($duplicates as $group) {
-			$color = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
-	
+			$color = $colors[$colorIndex % count($colors)];
 			foreach ($group as $row) {
 				$groupedData[] = array(
 					'data' => $row,
 					'color' => $color
 				);
 			}
+			$colorIndex++; // Pindah ke warna berikutnya
 		}
-	
 		return $groupedData;
 	}
 	private function findDuplicates($sheetData) {
@@ -80,31 +82,40 @@ class Excel extends CI_Controller {
 		$processedRows = array(); // Array to keep track of processed rows
 	
 		foreach ($sheetData as $key => $row) {
-			if (in_array($key, $processedRows)) {
-				continue; // Skip already processed rows
-			}
-	
-			$currentNokartu = $row['E']; // Nomor Kartu
-			$currentTglpulang = $row['D']; // Tanggal Pulang
-			$currentNamaPeserta = $row['F']; // Nama Peserta
-	
-			$foundDuplicates = array();
-			foreach ($sheetData as $innerKey => $innerRow) {
-				if ($key != $innerKey && $currentNokartu == $innerRow['E'] && $currentTglpulang == $innerRow['D'] && $currentNamaPeserta == $innerRow['F']) {
-					$foundDuplicates[] = $innerRow;
-					$processedRows[] = $innerKey; // Mark row as processed
+			if ($key > 3) {
+				if (in_array($key, $processedRows)) {
+					continue; // Skip already processed rows
 				}
-			}
-	
-			if (!empty($foundDuplicates)) {
-				$duplicates[] = array_merge(array($row), $foundDuplicates);
-				$processedRows[] = $key; // Mark main row as processed
+				// Revisi Tanggal Masuk dan no RM
+				$currentNokartu = $row['D']; // Nomor Kartu
+				$currentTglMasuk = $row['B']; // Tanggal Pulang
+				// $currentNamaPeserta = $row['F']; // Nama Peserta
+		
+				$foundDuplicates = array();
+				foreach ($sheetData as $innerKey => $innerRow) {
+					if ($key != $innerKey && $currentNokartu == $innerRow['D'] && $currentTglMasuk == $innerRow['B']) {
+						$foundDuplicates[] = $innerRow;
+						$processedRows[] = $innerKey; // Mark row as processed
+					}
+				}
+		
+				if (!empty($foundDuplicates)) {
+					$duplicates[] = array_merge(array($row), $foundDuplicates);
+					$processedRows[] = $key; // Mark main row as processed
+				}
 			}
 		}
 	
 		return $duplicates;
 	
     }
+
+	public function download()
+	{
+		$duplicates = $this->input->post('data');
+		$data['duplicates'] = json_decode($duplicates,true);
+		$this->load->view('download', $data);
+	}
 
 
 }
